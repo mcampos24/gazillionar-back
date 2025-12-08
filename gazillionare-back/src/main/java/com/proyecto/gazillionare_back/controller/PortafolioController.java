@@ -3,7 +3,7 @@ package com.proyecto.gazillionare_back.controller;
 
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import com.tuorg.tuapp.model.*;
+import com.proyecto.gazillionare_back.clases.*;
 @RestController
 @RequestMapping("/api/portafolio")
 public class PortafolioController {

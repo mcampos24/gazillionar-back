@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 })
 public abstract class Inversion {
 
-    protected final String nombre;
+    protected String nombre;
     protected double monto;
 
     public Inversion() {}

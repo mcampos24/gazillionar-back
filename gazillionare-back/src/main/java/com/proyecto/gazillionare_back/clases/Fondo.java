@@ -2,8 +2,8 @@ package com.proyecto.gazillionare_back.clases;
 
 public class Fondo extends Inversion {
 
-    private final String tipoFondo;
-    private final double rendimientoAnual;
+    private String tipoFondo;
+    private double rendimientoAnual;
 
     public Fondo() { super("default",0); }
     public Fondo(String nombre, double monto, String tipoFondo, double rendimientoAnual) {
@@ -15,7 +15,7 @@ public class Fondo extends Inversion {
         if (rendimientoAnual < 0)
             throw new IllegalArgumentException("El rendimiento no puede ser negativo");
 
-        this.tipo = tipoFondo;
+        this.tipoFondo = tipoFondo;
         this.rendimientoAnual = rendimientoAnual;
     }
 
@@ -31,11 +31,11 @@ public class Fondo extends Inversion {
         this.rendimientoAnual = rendimientoAnual;
     }
 
-    public double getTipoFondo() {
+    public String getTipoFondo() {
         return tipoFondo;
     }
-    public void setTipoFondo(double TipoFondo) {
-        this.TipoFondo = TipoFondo;
+    public void setTipoFondo(String TipoFondo) {
+        this.tipoFondo = tipoFondo;
     }
     @Override
     public double calcularValorFuturo() {
@@ -44,15 +44,14 @@ public class Fondo extends Inversion {
 
 
     public double calcularValorFuturo(int años) {
-        if (anios < 1) throw new IllegalArgumentException("Años inválidos");
-        return monto * Math.pow(1 + rendimientoAnual / 100.0, anios);
+        if (años < 1) throw new IllegalArgumentException("Años inválidos");
+        return monto * Math.pow(1 + rendimientoAnual / 100.0, años);
     }
-
 
     @Override
     public void mostrarDetalles() {
         printHeader();
-        System.out.println("  Tipo de fondo: " + tipo);
+        System.out.println("  Tipo de fondo: " + tipoFondo);
         System.out.println("  Rendimiento anual estimado: " + rendimientoAnual + "%");
         System.out.println("  Valor futuro estimado (1 año): $" + calcularValorFuturo());
     }

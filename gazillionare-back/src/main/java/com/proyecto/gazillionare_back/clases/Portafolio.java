@@ -59,9 +59,13 @@ public class Portafolio {
         return inversiones.isEmpty();
     }
 
+    public List<Inversion> getInversiones() {
+        return inversiones;
+    }
     @Override
     public String toString() {
         return "Portafolio con " + inversiones.size() + " inversiones.";
     }
+
 
 }

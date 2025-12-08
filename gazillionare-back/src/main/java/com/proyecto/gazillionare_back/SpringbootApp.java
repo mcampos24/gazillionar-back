@@ -18,8 +18,9 @@ public class SpringbootApp {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://10.0.2.2:8080") //ip de andriodn ojo
-                        .allowedMethods("*");
+                        .allowedOrigins("*")
+                        .allowedMethods("*")
+                        .allowedHeaders("*");
             }
         };
     }

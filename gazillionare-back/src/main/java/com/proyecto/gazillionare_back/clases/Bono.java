@@ -1,6 +1,6 @@
 package com.proyecto.gazillionare_back.clases;
 
-class Bono extends Inversion {
+public class Bono extends Inversion {
 
     private double retornoAnual;
     private int añosRestantes;
@@ -29,17 +29,17 @@ class Bono extends Inversion {
     public double getRetornoAnual() { return retornoAnual; }
     public void setRetornoAnual(double retornoAnual) { this.retornoAnual = retornoAnual; }
     public int getAñosRestantes() { return añosRestantes; }
-    public void setAñosRestantes(int añosRestantes) { this.añosRestantes = aniosRestantes; }
-    }
+    public void setAñosRestantes(int añosRestantes) { this.añosRestantes = añosRestantes; }
+
 
     @Override
     public double calcularValorFuturo() {
         return calcularValorFuturo(añosRestantes);
     }
 
-    public double calcularValorFuturo(int anios) {
-        if (anios < 1) throw new IllegalArgumentException("Años inválidos");
-        return monto * Math.pow(1 + retornoAnual / 100.0, anios);
+    public double calcularValorFuturo(int años) {
+        if (años < 1) throw new IllegalArgumentException("Años inválidos");
+        return monto * Math.pow(1 + retornoAnual / 100.0, años);
     }
 
     @Override

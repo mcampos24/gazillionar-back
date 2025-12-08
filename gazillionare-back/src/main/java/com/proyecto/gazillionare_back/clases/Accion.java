@@ -2,10 +2,10 @@ package com.proyecto.gazillionare_back.clases;
 
 public class Accion extends Inversion {
 
-    private final int cantidad;
-    private final double precioActual;
-    private final double eps;
-    private final double bvps;
+    private int cantidad;
+    private double precioActual;
+    private double eps;
+    private double bvps;
 
     public Accion(String nombre, int cantidad, double precioActual, double eps, double bvps) {
         super(nombre, cantidad * precioActual);
