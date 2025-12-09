@@ -2,6 +2,8 @@ package com.proyecto.gazillionare_back.controller;
 import com.proyecto.gazillionare_back.clases.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import java.util.List;
 
@@ -74,5 +76,35 @@ public class PortafolioController{
     public ResponseEntity<Void> limpiarPortafolio() {
         portafolio.limpiar();
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/{nombre}/detalles")
+    public ResponseEntity<Map<String, Object>> obtenerDetalles(@PathVariable String nombre) {
+        Inversion inv = portafolio.buscarPorNombre(nombre);
+        if (inv == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Map<String, Object> detalles = new LinkedHashMap<>();
+        detalles.put("tipo", inv.getTipo());
+        detalles.put("nombre", inv.getNombre());
+        detalles.put("monto", inv.getMonto());
+        detalles.put("valorFuturo", inv.calcularValorFuturo());
+
+        if (inv instanceof Bono bono) {
+            detalles.put("retornoAnual", bono.getRetornoAnual());
+            detalles.put("aniosRestantes", bono.getAniosRestantes());
+        } else if (inv instanceof Fondo fondo) {
+            detalles.put("tipoFondo", fondo.getTipoFondo());
+            detalles.put("rendimientoAnual", fondo.getRendimientoAnual());
+        } else if (inv instanceof Accion accion) {
+            detalles.put("cantidad", accion.getCantidad());
+            detalles.put("precioActual", accion.getPrecioActual());
+            detalles.put("eps", accion.getEPS());
+            detalles.put("bvps", accion.getBVPS());
+            detalles.put("pe", accion.calcularPERatio());
+            detalles.put("pb", accion.calcularPBRatio());
+        }
+
+        return ResponseEntity.ok(detalles);
     }
 }

@@ -1,5 +1,4 @@
 package com.proyecto.gazillionare_back.clases;
-
 public class Accion extends Inversion {
 
     private int cantidad;

@@ -1,19 +1,28 @@
 package com.proyecto.gazillionare_back.clases;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Fondo extends Inversion {
 
     private String tipoFondo;
     private double rendimientoAnual;
 
-    public Fondo() { super("default",0); }
-    public Fondo(String nombre, double monto, String tipoFondo, double rendimientoAnual) {
+    @JsonCreator
+    public Fondo(
+            @JsonProperty("nombre") String nombre,
+            @JsonProperty("monto") double monto,
+            @JsonProperty("tipoFondo") String tipoFondo,
+            @JsonProperty("rendimientoAnual") double rendimientoAnual
+    ) {
         super(nombre, monto);
 
-        if (tipoFondo == null || tipoFondo.isBlank())
+        if (tipoFondo == null || tipoFondo.isBlank()) {
             throw new IllegalArgumentException("El tipo de fondo no puede estar vacío");
-
-        if (rendimientoAnual < 0)
+        }
+        if (rendimientoAnual < 0) {
             throw new IllegalArgumentException("El rendimiento no puede ser negativo");
+        }
 
         this.tipoFondo = tipoFondo;
         this.rendimientoAnual = rendimientoAnual;
@@ -24,28 +33,24 @@ public class Fondo extends Inversion {
         return "FONDO";
     }
 
-    public double getRendimientoAnual() {
-        return rendimientoAnual;
-    }
-    public void setRendimientoAnual(double rendimientoAnual) {
-        this.rendimientoAnual = rendimientoAnual;
-    }
-
     public String getTipoFondo() {
         return tipoFondo;
     }
-    public void setTipoFondo(String TipoFondo) {
-        this.tipoFondo = tipoFondo;
+
+    public double getRendimientoAnual() {
+        return rendimientoAnual;
     }
+
     @Override
     public double calcularValorFuturo() {
         return calcularValorFuturo(1);
     }
 
-
-    public double calcularValorFuturo(int años) {
-        if (años < 1) throw new IllegalArgumentException("Años inválidos");
-        return monto * Math.pow(1 + rendimientoAnual / 100.0, años);
+    public double calcularValorFuturo(int anios) {
+        if (anios < 1) {
+            throw new IllegalArgumentException("Años inválidos");
+        }
+        return getMonto() * Math.pow(1 + rendimientoAnual / 100.0, anios);
     }
 
     @Override
