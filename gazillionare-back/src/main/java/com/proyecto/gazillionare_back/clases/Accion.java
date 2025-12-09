@@ -23,7 +23,7 @@ public class Accion extends Inversion {
 
     @Override
     public String getTipo() {
-        return "Acción";
+        return "ACCION";
     }
 
     public int getCantidad() { return cantidad; }

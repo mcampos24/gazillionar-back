@@ -8,9 +8,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         property = "tipo"
 )
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = Bono.class, name = "Bono"),
-        @JsonSubTypes.Type(value = Fondo.class, name = "Fondo"),
-        @JsonSubTypes.Type(value = Accion.class, name = "Acción")
+        @JsonSubTypes.Type(value = Bono.class, name = "BONO"),
+        @JsonSubTypes.Type(value = Fondo.class, name = "FONDO"),
+        @JsonSubTypes.Type(value = Accion.class, name = "ACCION")
 })
 public abstract class Inversion {
 
@@ -57,6 +57,19 @@ public abstract class Inversion {
     @Override
     public String toString() {
         return getTipo() + ": " + nombre + " (Monto: $" + monto + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Inversion that = (Inversion) obj;
+        return nombre.equals(that.nombre);
+    }
+
+    @Override
+    public int hashCode() {
+        return nombre.hashCode();
     }
 }
 

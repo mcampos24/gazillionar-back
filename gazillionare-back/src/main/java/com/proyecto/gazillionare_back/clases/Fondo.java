@@ -21,7 +21,7 @@ public class Fondo extends Inversion {
 
     @Override
     public String getTipo() {
-        return "Fondo";
+        return "FONDO";
     }
 
     public double getRendimientoAnual() {

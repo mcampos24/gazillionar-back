@@ -3,38 +3,38 @@ package com.proyecto.gazillionare_back.clases;
 public class Bono extends Inversion {
 
     private double retornoAnual;
-    private int añosRestantes;
+    private int aniosRestantes;
 
     public Bono() {
         super("default", 0);
     }
-    public Bono(String nombre, double monto, double retornoAnual, int añosRestantes) {
+    public Bono(String nombre, double monto, double retornoAnual, int aniosRestantes) {
         super(nombre, monto);
 
         if (retornoAnual <= 0)
             throw new IllegalArgumentException("Retorno anual inválido");
 
-        if (añosRestantes <= 0)
+        if (aniosRestantes <= 0)
             throw new IllegalArgumentException("Años inválidos");
 
         this.retornoAnual = retornoAnual;
-        this.añosRestantes = añosRestantes;
+        this.aniosRestantes = aniosRestantes;
     }
 
     @Override
     public String getTipo() {
-        return "Bono";
+        return "BONO";
     }
 
     public double getRetornoAnual() { return retornoAnual; }
     public void setRetornoAnual(double retornoAnual) { this.retornoAnual = retornoAnual; }
-    public int getAñosRestantes() { return añosRestantes; }
-    public void setAñosRestantes(int añosRestantes) { this.añosRestantes = añosRestantes; }
+    public int getaniosRestantes() { return aniosRestantes; }
+    public void setAniosRestantes(int aniosRestantes) { this.aniosRestantes = aniosRestantes; }
 
 
     @Override
     public double calcularValorFuturo() {
-        return calcularValorFuturo(añosRestantes);
+        return calcularValorFuturo(aniosRestantes);
     }
 
     public double calcularValorFuturo(int años) {
@@ -47,7 +47,7 @@ public class Bono extends Inversion {
         printHeader();
         System.out.println("  Monto invertido: $" + monto);
         System.out.println("  Retorno anual: " + retornoAnual + "%");
-        System.out.println("  Años restantes: " + añosRestantes);
+        System.out.println("  Años restantes: " + aniosRestantes);
         System.out.println("  Valor futuro estimado: $" + calcularValorFuturo());
     }
 }

@@ -13,16 +13,41 @@ public class Portafolio {
         inversiones.add(inv);
     }
 
-    public boolean eliminar(Inversion inv) {
-        if (inv == null)
-            throw new IllegalArgumentException("La inversión no puede ser null");
-        return inversiones.remove(inv);
-    }
 
     public boolean eliminarPorNombre(String nombre) {
+        if (nombre == null) {
+            return false;
+        }
         return inversiones.removeIf(inv -> inv.getNombre().equalsIgnoreCase(nombre));
     }
 
+    public Inversion buscarPorNombre(String nombre) {
+        if (nombre == null) {
+            return null;
+        }
+        for (Inversion inv : inversiones) {
+            if (nombre.equalsIgnoreCase(inv.getNombre())) {
+                return inv;
+            }
+        }
+        return null;
+    }
+
+    public java.util.List<Inversion> obtenerInversionesPorNombres(java.util.List<String> nombres) {
+        java.util.List<Inversion> resultado = new java.util.ArrayList<>();
+
+        if (nombres == null) {
+            return resultado;
+        }
+
+        for (String nombre : nombres) {
+            Inversion inv = buscarPorNombre(nombre);
+            if (inv != null) {
+                resultado.add(inv);
+            }
+        }
+        return resultado;
+    }
     public void limpiar() {
         inversiones.clear();
     }
